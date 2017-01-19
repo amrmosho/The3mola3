@@ -8,19 +8,10 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-
-
-
     <include
-        layout="@layout/app_bar_home"
+        layout="@layout/app_bar_home_data"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
-
-
-
-
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -28,11 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_home"
-        app:menu="@menu/activity_home_drawer"
-
-
-
-        />
+        app:headerLayout="@layout/nav_header_home_data"
+        app:menu="@menu/activity_home_data_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
