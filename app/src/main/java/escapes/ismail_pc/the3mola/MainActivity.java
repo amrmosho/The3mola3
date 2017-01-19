@@ -2,6 +2,7 @@ package escapes.ismail_pc.the3mola;
 
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,21 +45,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+
+        setContentView(R.layout.activity_main);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         ListView l =(ListView) findViewById(R.id.listView);
 
-        db d=new db("sys_html" );
+        db d=new db("data_currency" ,"com_currency.type='usd'");
         d.thisContext=this;
         d.thisListview=l;
-
-
+        d.ListImage="image";
+        d.ListID="code";
         d.get_data();
-
-
-
-
-
 
 
     }

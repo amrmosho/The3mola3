@@ -22,6 +22,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -29,24 +30,23 @@ import java.util.Iterator;
  */
 
 
-public class db {
+public class db  {
     String TAG = "DBClass";
     private String thisTable = "";
-    private String thisUrl = "";
     private String thisWhere = "";
     public Context thisContext;
     public ListView thisListview;
-
+    public String ListTitle="title";
+    public String ListDes="";
+    public String ListID="";
+    public String ListImage="";
 
     public db(String table) {
         thisTable = table;
-        thisUrl = "http://currency.sys4me.com/test.php";
-
     }
 
     public db(String table, String where) {
         thisTable = table;
-        thisUrl = "http://currency.sys4me.com/test.php";
         thisWhere = where;
     }
 
@@ -57,7 +57,12 @@ public class db {
         d.where = thisWhere;
         d.v = thisListview;
         d.c = thisContext;
-        d.execute(thisUrl);
+        d.desKey = ListDes;
+        d.imagekey = ListImage;
+        d.idKey = ListID;
+        d.titleKey = ListTitle;
+        d.execute(options.thisUrl);
+
 
     }
 
@@ -65,31 +70,21 @@ public class db {
     private class DownloadData extends AsyncTask<String, Void, String>
 
     {
-
-
-        @Override
-        protected void onPreExecute() {
-            Log.d(TAG, "onPreExecute");
-
-            super.onPreExecute();
-        }
-
-
+        String desKey = "";
+        String imagekey = "";
+        String idKey = "id";
+        String titleKey = "title";
         String table = "sys_html";
         String where = "";
         ListView v;
         Context c;
+        String sellKey = "sell";
+        String buyKey = "buy";
 
-
-        void fill_list(ArrayList<HashMap<String, String>> listdata, String key) {
-          ArrayList<String> showdata = new ArrayList();
-            for (HashMap<String, String> h : listdata) {
-                showdata.add(h.get(key));
-            }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(c, android.R.layout.simple_list_item_1, showdata);
-            v.setAdapter(adapter);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
         }
-
 
         @Override
         protected String doInBackground(String... strings) {
@@ -102,9 +97,67 @@ public class db {
             Log.w(TAG, "onPostExecute:" + s);
             ArrayList<HashMap<String, String>> r = jsonToMapUpdate(s);
 
-            fill_list(r, "title");
+            fill_bank_table(r);
 
         }
+        void fill_bank_table(ArrayList<HashMap<String, String>> listdata) {
+            final List<bank_table_list_item> mydata = new ArrayList<>();
+            for (HashMap<String, String> h : listdata) {
+                bank_table_list_item c = new bank_table_list_item();
+                c.setTitle(h.get(titleKey));
+
+                if (desKey!=""){
+                    c.setDes(h.get(desKey));
+                }
+                if (imagekey!=""){
+                    c.setImage(h.get(imagekey));
+                }
+                if (idKey!=""){
+                    c.setID(h.get(idKey));
+                }
+
+                if (sellKey!=""){
+                    c.setSell(h.get(sellKey));
+                }
+
+                if (buyKey!=""){
+                    c.setBuy(h.get(buyKey));
+                }
+
+                mydata.add(c);
+            }
+
+            bank_table_Adapte    adapter = new bank_table_Adapte(c, 0, mydata);
+            v.setAdapter(adapter);
+        }
+
+
+
+        void fill_list(ArrayList<HashMap<String, String>> listdata) {
+            final List<list_item> mydata = new ArrayList<>();
+            for (HashMap<String, String> h : listdata) {
+                list_item c = new list_item();
+                c.setTitle(h.get(titleKey));
+
+                if (desKey!=""){
+                    c.setDes(h.get(desKey));
+                }
+                if (imagekey!=""){
+                    c.setImage(h.get(imagekey));
+                }
+                if (idKey!=""){
+                    c.setID(h.get(idKey));
+                }
+
+                mydata.add(c);
+            }
+
+            listArrayAdapte    adapter = new listArrayAdapte(c, 0, mydata);
+            v.setAdapter(adapter);
+        }
+
+
+
 
         /**
          * connect With server
