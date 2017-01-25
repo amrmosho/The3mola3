@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import escapes.ismail_pc.the3mola.R;
+import escapes.ismail_pc.the3mola.data_home_tabs;
 
 
 class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
@@ -32,7 +33,11 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
     Context context;
     List<bank_table_list_item> objects;
     List<bank_table_list_item> fobjects;
-    public bank_table_Adapte(Context context, int resource, List<bank_table_list_item> objects) {
+    data_home_tabs.PlaceholderFragment myparent;
+
+
+
+    public bank_table_Adapte(Context context, int resource, List<bank_table_list_item> objects, data_home_tabs.PlaceholderFragment myparent) {
         super(context, resource, objects);
 
         this.objects = new ArrayList<bank_table_list_item>();
@@ -42,7 +47,7 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
         this.fobjects.addAll(objects);
 
         this.context = context;
-
+        this.myparent=myparent;
 
 
     }
@@ -70,7 +75,9 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
             @Override
             public void onClick(View view) {
 
-
+                Log.d("bank_table_Adapte",context.getPackageName());
+                data_home_tabs a= (data_home_tabs)      context;
+                myparent.update_mybanks();
                 db d=new db("banks");
                 d.thisContext=view.getContext();
                 d.sand_data.put("bank",cat.getID());
@@ -85,14 +92,6 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
 
 
 
-       /* try {
-            URL url = new URL("http://currency.sys4me.com/ins_upload//banks/albaraka.png");
-            Bitmap bmp = null;
-            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            i.setImageBitmap(bmp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
 
         String name = cat.getID();
@@ -107,61 +106,6 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
 
 
 
-
-
-    private  class  update_image extends AsyncTask<String,Void,String >{
-String TAG="update_image Task";
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-        ImageView i;
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-
-
-            update_my_image(strings[0]);
-            return "";
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-
-
-
-        void update_my_image(String path){
-
-
-
-            try {
-
-                 URL url = new URL(path);
-
-
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-                if (connection.getResponseCode()==200){
-                    Bitmap   bmp = BitmapFactory.decodeStream(connection.getInputStream());
-                    i.setImageBitmap(bmp);
-                }
-
-            } catch (MalformedURLException e) {
-                Log.e(TAG, "  Error" + e.getMessage());
-            } catch (IOException e) {
-                Log.e(TAG, "  Error" + e.getMessage());
-            } catch (SecurityException e) {
-                Log.e(TAG, " Security Exception.  Needs permisson? " + e.getMessage());
-
-            }
-
-
-
-        }
-    }
 
 
 

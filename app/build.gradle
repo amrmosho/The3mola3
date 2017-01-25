@@ -39,4 +39,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-gcm:+'
     compile 'com.pushbots:pushbots-lib:3.0.1@aar'
+
+
+    compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+
+
+
 }

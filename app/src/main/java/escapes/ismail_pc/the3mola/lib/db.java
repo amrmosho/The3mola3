@@ -3,6 +3,7 @@ package escapes.ismail_pc.the3mola.lib;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -24,6 +25,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import escapes.ismail_pc.the3mola.data_home_tabs;
+
 
 /**
  * Created by ismail-pc on 18 - 01 - 2017.
@@ -40,6 +43,11 @@ public class db  {
     public String ListDes="";
     public String ListID="";
     public String ListImage="";
+
+    public   com.github.rahatarmanahmed.cpv.CircularProgressView ProgressView;
+
+
+   public data_home_tabs.PlaceholderFragment myparent;
     public  HashMap<String, String> sand_data= new HashMap();
     public db(String table) {
         thisTable = table;
@@ -64,6 +72,11 @@ public class db  {
         d.execute(options.thisUrl);
         d.sand_data = this.sand_data;
 
+        d.sand_data = this.sand_data;
+        d.myparent=myparent;
+        d.myparent=myparent;
+        d.ProgressView=ProgressView;
+
 
         HashMap<String, String> sand_data= new HashMap();
     }
@@ -82,6 +95,9 @@ public class db  {
         Context c;
         String sellKey = "sell";
         String buyKey = "buy";
+
+        public   com.github.rahatarmanahmed.cpv.CircularProgressView ProgressView;
+         data_home_tabs.PlaceholderFragment myparent;
        HashMap<String, String> sand_data= new HashMap();
 
 
@@ -116,6 +132,12 @@ public class db  {
             }else   if (table=="data_currency"){
                 fill_bank_table(r);}
 
+            if (ProgressView!=null){
+
+
+                ProgressView.setVisibility(View.GONE);
+            }
+
 
         }
         void fill_bank_table(ArrayList<HashMap<String, String>> listdata) {
@@ -145,12 +167,9 @@ public class db  {
                 mydata.add(c);
             }
 
-            bank_table_Adapte    adapter = new bank_table_Adapte(c, 0, mydata);
+            bank_table_Adapte    adapter = new bank_table_Adapte(c, 0, mydata,myparent);
             v.setAdapter(adapter);
         }
-
-
-
 
 
         void fill_my_banks(ArrayList<HashMap<String, String>> listdata) {
@@ -190,7 +209,7 @@ public class db  {
 
 
 
-            my_banks_listArrayAdapte    adapter = new my_banks_listArrayAdapte(c, 0, mydata);
+            my_banks_listArrayAdapte    adapter = new my_banks_listArrayAdapte(c, 0, mydata,myparent);
             v.setAdapter(adapter);
         }
 

@@ -27,6 +27,7 @@ import com.pushbots.push.Pushbots;
 
 import escapes.ismail_pc.the3mola.lib.db;
 
+
 public class data_home_tabs extends AppCompatActivity {
 
     /**
@@ -67,6 +68,13 @@ public class data_home_tabs extends AppCompatActivity {
 
     }
 
+void updaet_page(int p){
+
+    mViewPager.setCurrentItem(p);
+    mSectionsPagerAdapter.notifyDataSetChanged();
+
+}
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,10 +102,45 @@ public class data_home_tabs extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
+
+        public void update_mybanks() {
+
+
+            ((data_home_tabs) getActivity()).updaet_page(0);
+
+            if (myl!=null){
+                com.github.rahatarmanahmed.cpv.CircularProgressView progress_view_mybanks = (com.github.rahatarmanahmed.cpv.CircularProgressView) mybanksView.findViewById(R.id.progress_view_mybanks);
+                progress_view_mybanks.setVisibility(View.VISIBLE);
+                myl.setAdapter(null);
+            db d = new db("get_banks");
+            d.thisContext = mybanksView.getContext();
+            d.thisListview = myl;
+            d.myparent =this;
+                myl.setDivider(null);
+            d.sand_data.put("pushbots_is", Pushbots.sharedInstance().getGCMRegistrationId());
+            d.ListID = "code";
+            d.ListImage = "image";
+                d.ProgressView=progress_view_mybanks;
+
+
+            d.get_data();
+            }
+
+
+
+        }
+
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
+
+
+
+
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
@@ -124,14 +167,12 @@ public class data_home_tabs extends AppCompatActivity {
         View mybanksView = null;
 
         FloatingActionButton floatingActionButton_USD;
-
         FloatingActionButton floatingActionButton_AED;
         FloatingActionButton floatingActionButton_EUR;
         FloatingActionButton floatingActionButton_SAR;
         FloatingActionButton floatingActionButton_KWD;
         FloatingActionButton floatingActionButton_title;
         TextView all_c_title;
-
         void update_btns_status(int v) {
 
             floatingActionButton_USD.setVisibility(v);
@@ -142,8 +183,6 @@ public class data_home_tabs extends AppCompatActivity {
 
 
         }
-
-
         void update_all_data(String type) {
             int img = 0;
             int title = 0;
@@ -171,29 +210,37 @@ public class data_home_tabs extends AppCompatActivity {
 
 
             }
+            com.github.rahatarmanahmed.cpv.CircularProgressView progress_view_all = (com.github.rahatarmanahmed.cpv.CircularProgressView) allView.findViewById(R.id.progress_view_all);
+            progress_view_all.setVisibility(View.VISIBLE);
             all_c_title.setText(getString(title));
             floatingActionButton_title.setImageResource(img);
             update_btns_status(View.GONE);
-
-
             ListView l = (ListView) allView.findViewById(R.id.list_all_home);
-
-
             db d = new db("data_currency", "com_currency.type='"+type+"'");
             d.thisContext = allView.getContext();
             d.thisListview = l;
+            d.myparent =this;
             d.ListImage = "image";
+            d.ProgressView = progress_view_all;
             d.ListID = "code";
             d.get_data();
             allFill = true;
 
 
+
+
         }
 
 
+        ViewGroup mycontainer;
+        LayoutInflater myinflater;
+        ListView myl;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            this.mycontainer=container;
+            this.myinflater=inflater;
+
 
             if (android.os.Build.VERSION.SDK_INT > 9) {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -204,19 +251,20 @@ public class data_home_tabs extends AppCompatActivity {
             if (getArguments().getInt(ARG_SECTION_NUMBER) == 1) {
 
 
-                if (!mybanksFill) {
+              //  if (!mybanksFill) {
                     mybanksView = inflater.inflate(R.layout.fragment_home_page, container, false);
-                    ListView l = (ListView) mybanksView.findViewById(R.id.home_my_banks_list);
+                     myl = (ListView) mybanksView.findViewById(R.id.home_my_banks_list);
                     db d = new db("get_banks");
                     d.thisContext = mybanksView.getContext();
-                    d.thisListview = l;
-                    l.setDivider(null);
+                    d.thisListview = myl;
+                    d.myparent =this;
+                    myl.setDivider(null);
                     d.sand_data.put("pushbots_is", Pushbots.sharedInstance().getGCMRegistrationId());
                     d.ListID = "code";
                     d.ListImage = "image";
                     d.get_data();
                     mybanksFill = true;
-                }
+             //   }
                 return mybanksView;
 
 
@@ -234,7 +282,7 @@ public class data_home_tabs extends AppCompatActivity {
                     floatingActionButton_title = (FloatingActionButton) allView.findViewById(R.id.floatingActionButton_title);
                     all_c_title = (TextView) allView.findViewById(R.id.all_c_title);
                     update_btns_status(View.GONE);
-
+                    update_all_data("usd");
                     floatingActionButton_USD.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -295,15 +343,26 @@ public class data_home_tabs extends AppCompatActivity {
 
             } else {
                 if (!min_max_Fill) {
+
+
+
+
                     min_max_View = inflater.inflate(R.layout.fragment_min_max_page, container, false);
                     ListView lmin = (ListView) min_max_View.findViewById(R.id._min_max_list);
+                    com.github.rahatarmanahmed.cpv.CircularProgressView progress_view_min_max = (com.github.rahatarmanahmed.cpv.CircularProgressView) min_max_View.findViewById(R.id.progress_view_min_max);
+                    progress_view_min_max.setVisibility(View.VISIBLE);
+
                     lmin.setDivider(null);
 
                     db d = new db("min_max", "com_currency.type='usd'");
                     d.thisContext = min_max_View.getContext();
                     d.thisListview = lmin;
+                    d.myparent =this;
                     d.ListImage = "image";
                     d.ListID = "code";
+
+                    d.ProgressView = progress_view_min_max;
+
                     d.get_data();
                     min_max_Fill = true;
                 }

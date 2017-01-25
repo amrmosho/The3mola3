@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import escapes.ismail_pc.the3mola.R;
+import escapes.ismail_pc.the3mola.data_home_tabs;
 
 
 class my_banks_listArrayAdapte extends ArrayAdapter<my_banks_list_item>  {
@@ -34,9 +35,9 @@ class my_banks_listArrayAdapte extends ArrayAdapter<my_banks_list_item>  {
     Context context;
     List<my_banks_list_item> objects;
     List<my_banks_list_item> fobjects;
+ data_home_tabs.PlaceholderFragment myparent;
 
-
-    public my_banks_listArrayAdapte(Context context, int resource, List<my_banks_list_item> objects) {
+    public my_banks_listArrayAdapte(Context context, int resource, List<my_banks_list_item> objects, data_home_tabs.PlaceholderFragment myparent) {
         super(context, resource, objects);
 
         this.objects = new ArrayList<my_banks_list_item>();
@@ -47,7 +48,7 @@ class my_banks_listArrayAdapte extends ArrayAdapter<my_banks_list_item>  {
 
         this.context = context;
 
-
+this.myparent=myparent;
 
     }
 
@@ -118,13 +119,16 @@ class my_banks_listArrayAdapte extends ArrayAdapter<my_banks_list_item>  {
             public void onClick(View view) {
 
 
+
+
                 db d=new db("banks");
                 d.thisContext=view.getContext();
                 d.sand_data.put("bank",cat.getID());
                 d.sand_data.put("pushbots_is", Pushbots.sharedInstance().getGCMRegistrationId());
                 d.sand_data.put("device_type","2");
-                d.sand_data.put("status","remove                                                                                                                                                                                                                                                                                                          ");
+                d.sand_data.put("status","remove");
                 d.get_data();
+                myparent.update_mybanks();
 
             }
         });
