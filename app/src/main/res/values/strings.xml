@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">The3mola</string>
 
+
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -9,4 +12,16 @@
     <string name="title_activity_home_data">home_data</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_tabs_home">tabs_home</string>
+    <string name="title_activity_data_home_tabs">The3omla</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="c_max">Max : </string>
+    <string name="c_min">Min : </string>
+    <string name="usd">USD</string>
+    <string name="kwd">KWD</string>
+    <string name="eur">EUR</string>
+    <string name="sar">SAR</string>
+    <string name="aed">AED</string>
 </resources>

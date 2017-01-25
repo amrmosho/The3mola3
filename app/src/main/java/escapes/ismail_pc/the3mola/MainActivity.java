@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+
         ListView l =(ListView) findViewById(R.id.listView);
 
         db d=new db("data_currency" ,"com_currency.type='usd'");

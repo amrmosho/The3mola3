@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="0dp"
+        android:id="@+id/cv"
+        app:cardElevation="4dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_height="220dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                tools:layout_editor_absoluteY="8dp"
+                tools:layout_editor_absoluteX="8dp"
+                android:layout_height="45dp"
+                >
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearance"
+                    android:text="Large Text"
+                    android:id="@+id/mybanks_txt_bank_title"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp" />
+
+                <ImageView
+                    app:srcCompat="@android:drawable/ic_menu_report_image"
+                    android:id="@+id/mybanks_image_bank_"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintLeft_toRightOf="@+id/mybanks_txt_bank_title"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:scaleType="fitEnd"
+                    android:layout_height="40dp"
+                    android:layout_width="60dp" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimaryLight"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="USD:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/max_min_txt_max"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="@+id/mybanks_txt_usd_sell"
+                   app:layout_constraintLeft_toLeftOf="parent"
+
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:text="Sell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/max_min_txt_min"
+                    android:textSize="12sp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toRightOf="@+id/max_min_txt_max"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintHorizontal_bias="0.16"
+                    android:layout_marginTop="16dp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:text="Buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Buy"
+                    android:textSize="12sp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toRightOf="@+id/max_min_txt_min"
+                    app:layout_constraintTop_toTopOf="@+id/max_min_txt_min"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintHorizontal_bias="0.39"
+                    android:textStyle="normal|bold"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_sar_buy"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_kwd_buy"
+                    app:layout_constraintLeft_toLeftOf="@+id/mybanks_txt_kwd_buy"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_kwd_buy"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_aed_buy"
+                    app:layout_constraintLeft_toLeftOf="@+id/mybanks_txt_aed_buy"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_aed_buy"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_eur_buy"
+                    app:layout_constraintLeft_toLeftOf="@+id/mybanks_txt_eur_buy"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_eur_buy"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_usd_buy"
+                    app:layout_constraintLeft_toLeftOf="@+id/mybanks_txt_usd_buy"
+                    android:textColor="@color/colorPrimaryText"
+                    android:layout_marginTop="8dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_usd_buy"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/Buy"
+                    android:textColor="@color/colorPrimaryText"
+                    app:layout_constraintLeft_toLeftOf="@+id/Buy" />
+
+                <TextView
+                    android:text="KWD:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/max_min_txt_maxbank"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_max" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_delete_forever_white_24dp"
+                    android:id="@+id/FloatingActionButton_remove_pank"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:text="EUR:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView16"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_max"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/max_min_txt_max"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:text="SAR:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView14"
+                    android:textSize="12sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/max_min_txt_maxbank"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_max" />
+
+                <TextView
+                    android:text="AED:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView13"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_max"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_eur_sell"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_min"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_usd_sell"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_sar_sell"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_min"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_kwd_sell"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_kwd_sell"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_min"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_aed_sell"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_aed_sell"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_min"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/mybanks_txt_eur_sell"
+                    android:textColor="@color/colorPrimaryText" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mybanks_txt_usd_sell"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_min"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/max_min_txt_min"
+                    android:textColor="@color/colorPrimaryText" />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>

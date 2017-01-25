@@ -40,7 +40,7 @@ public class db  {
     public String ListDes="";
     public String ListID="";
     public String ListImage="";
-
+    public  HashMap<String, String> sand_data= new HashMap();
     public db(String table) {
         thisTable = table;
     }
@@ -62,8 +62,10 @@ public class db  {
         d.idKey = ListID;
         d.titleKey = ListTitle;
         d.execute(options.thisUrl);
+        d.sand_data = this.sand_data;
 
 
+        HashMap<String, String> sand_data= new HashMap();
     }
 
 
@@ -80,6 +82,8 @@ public class db  {
         Context c;
         String sellKey = "sell";
         String buyKey = "buy";
+       HashMap<String, String> sand_data= new HashMap();
+
 
         @Override
         protected void onPreExecute() {
@@ -97,7 +101,21 @@ public class db  {
             Log.w(TAG, "onPostExecute:" + s);
             ArrayList<HashMap<String, String>> r = jsonToMapUpdate(s);
 
-            fill_bank_table(r);
+            if (table=="min_max") {
+
+                fill_min_max(r);
+
+
+            }   else    if (table=="get_banks"){
+
+                    fill_my_banks(r);
+
+
+
+
+            }else   if (table=="data_currency"){
+                fill_bank_table(r);}
+
 
         }
         void fill_bank_table(ArrayList<HashMap<String, String>> listdata) {
@@ -133,30 +151,78 @@ public class db  {
 
 
 
-        void fill_list(ArrayList<HashMap<String, String>> listdata) {
-            final List<list_item> mydata = new ArrayList<>();
+
+
+        void fill_my_banks(ArrayList<HashMap<String, String>> listdata) {
+            final List<my_banks_list_item> mydata = new ArrayList<>();
+
+
             for (HashMap<String, String> h : listdata) {
-                list_item c = new list_item();
+                my_banks_list_item c = new my_banks_list_item();
                 c.setTitle(h.get(titleKey));
 
-                if (desKey!=""){
-                    c.setDes(h.get(desKey));
-                }
-                if (imagekey!=""){
-                    c.setImage(h.get(imagekey));
-                }
-                if (idKey!=""){
-                    c.setID(h.get(idKey));
-                }
+                c.setID(h.get("code"));
+
+
+                c.setAed_buy(h.get("aed_buy"));
+                c.setAed_sell(h.get("aed_sell"));
+
+                c.setEur_buy(h.get("eur_buy"));
+                c.setEur_sell(h.get("eur_sell"));
+
+                c.setKwd_buy(h.get("kwd_buy"));
+                c.setKwd_sell(h.get("kwd_sell"));
+
+                c.setSar_buy(h.get("sar_buy"));
+                c.setSar_sell(h.get("sar_sell"));
+
+                c.setUsd_buy(h.get("usd_buy"));
+                c.setUsd_sell(h.get("usd_sell"));
+
+
+
+
+
 
                 mydata.add(c);
             }
 
-            listArrayAdapte    adapter = new listArrayAdapte(c, 0, mydata);
+
+
+
+            my_banks_listArrayAdapte    adapter = new my_banks_listArrayAdapte(c, 0, mydata);
             v.setAdapter(adapter);
         }
 
 
+        void fill_min_max(ArrayList<HashMap<String, String>> listdata) {
+            final List<min_max_list_item> mydata = new ArrayList<>();
+
+
+            for (HashMap<String, String> h : listdata) {
+                min_max_list_item c = new min_max_list_item();
+                c.setTitle(h.get(titleKey));
+                c.setID(h.get("code"));
+                    c.setBuy(h.get("buy"));
+                c.setBuyBankCode(h.get("buy_bank_code"));
+                c.setBuyBankImage(h.get("buy_bank_image"));
+                c.setBuyBankTitle(h.get("buy_bank"));
+
+                c.setSell(h.get("sell"));
+                c.setSellBankCode(h.get("sell_bank_code"));
+                c.setSellBankImage(h.get("sell_bank_image"));
+                c.setSellBankTitle(h.get("sell_bank"));
+
+                    c.setID(h.get(idKey));
+                mydata.add(c);
+                }
+
+
+
+
+            min_max_listArrayAdapte    adapter = new min_max_listArrayAdapte(c, 0, mydata);
+            v.setAdapter(adapter);
+        }
 
 
         /**
@@ -183,7 +249,19 @@ public class db  {
 
                 connection.setRequestMethod("POST");
                 String data = URLEncoder.encode("table", "UTF-8") + "=" + URLEncoder.encode(table, "UTF-8");
-                data += "&" + URLEncoder.encode("where", "UTF-8") + "=" + URLEncoder.encode(where, "UTF-8");
+
+
+if (where!="") {
+    data += "&" + URLEncoder.encode("where", "UTF-8") + "=" + URLEncoder.encode(where, "UTF-8");
+}
+for(java.lang.String k:sand_data.keySet()){
+    data += "&" + URLEncoder.encode(k, "UTF-8") + "=" + URLEncoder.encode(sand_data.get(k), "UTF-8");
+
+
+
+}
+
+
                 OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
                 wr.write(data);
                 wr.flush();

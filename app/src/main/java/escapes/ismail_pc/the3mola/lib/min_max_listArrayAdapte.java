@@ -6,16 +6,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.pushbots.push.Pushbots;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -27,16 +25,16 @@ import java.util.List;
 import escapes.ismail_pc.the3mola.R;
 
 
-class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
-   String TAG="bank_table_Adapte" ;
+class min_max_listArrayAdapte extends ArrayAdapter<min_max_list_item>  {
+
     Context context;
-    List<bank_table_list_item> objects;
-    List<bank_table_list_item> fobjects;
-    public bank_table_Adapte(Context context, int resource, List<bank_table_list_item> objects) {
+    List<min_max_list_item> objects;
+    List<min_max_list_item> fobjects;
+    public min_max_listArrayAdapte(Context context, int resource, List<min_max_list_item> objects) {
         super(context, resource, objects);
 
-        this.objects = new ArrayList<bank_table_list_item>();
-        this.fobjects = new ArrayList<bank_table_list_item>();
+        this.objects = new ArrayList<min_max_list_item>();
+        this.fobjects = new ArrayList<min_max_list_item>();
 
         this.objects.addAll(objects) ;
         this.fobjects.addAll(objects);
@@ -52,59 +50,54 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
 
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate( R.layout.bank_table_list, null);
-        TextView t = (TextView) view.findViewById(R.id.bank_table_title);
-        ImageView i = (ImageView) view.findViewById(R.id.bank_table_image);
-        TextView s = (TextView) view.findViewById(R.id.max_min_txt_max);
-        TextView b = (TextView) view.findViewById(R.id.max_min_txt_min);
+        View view = inflater.inflate( R.layout.max_man_table_list, null);
 
-     final    bank_table_list_item cat = objects.get(position);
+
+        TextView t = (TextView) view.findViewById(R.id.mybanks_txt_bank_title);
+
+        TextView max = (TextView) view.findViewById(R.id.max_min_txt_max);
+        TextView min = (TextView) view.findViewById(R.id.max_min_txt_min);
+
+        TextView maxbank = (TextView) view.findViewById(R.id.max_min_txt_maxbank);
+        TextView minbank = (TextView) view.findViewById(R.id.mybanks_txt_eur_sell);
+
+        min_max_list_item cat = objects.get(position);
         t.setText(cat.getTitle());
-        s.setText(cat.getSell());
-        b.setText(cat.getBuy());
-
-        ImageButton addTofav = (ImageButton) view.findViewById(R.id.addTofav);
+        max.setText( context.getResources().getString(R.string.c_max) +cat.getSell());
+        min.setText(context.getResources().getString(R.string.c_min) +cat.getBuy());
 
 
-        addTofav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        maxbank.setText(cat.getBuyBankTitle());
+        minbank.setText(cat.getSellBankTitle());
 
+String n="ic_"+cat.getID();
 
-                db d=new db("banks");
-                d.thisContext=view.getContext();
-                d.sand_data.put("bank",cat.getID());
-                d.sand_data.put("pushbots_is",Pushbots.sharedInstance().getGCMRegistrationId());
-                d.sand_data.put("device_type","2");
-
-                d.get_data();
-
-            }
-        });
+        FloatingActionButton FloatingActionButton_min_max_c = (FloatingActionButton) view.findViewById(R.id.FloatingActionButton_min_max_c);
+        int id = context.getApplicationContext().getResources().getIdentifier(n, "drawable", context.getPackageName());
 
 
 
-
-       /* try {
-            URL url = new URL("http://currency.sys4me.com/ins_upload//banks/albaraka.png");
-            Bitmap bmp = null;
-            bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            i.setImageBitmap(bmp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        FloatingActionButton_min_max_c.setImageResource(id);
 
 
-        String name = cat.getID();
+        // try {
+           // URL url = new URL("http://currency.sys4me.com/ins_upload//banks/albaraka.png");
+          //  Bitmap bmp = null;
 
-        Log.e("name" ,name);
-        int id = context.getApplicationContext().getResources().getIdentifier(name, "drawable", context.getPackageName());
-       // Drawable drawable = context.getResources().getDrawable(id);
-        i.setImageResource(id);
+          //  bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+          //  i.setImageBitmap(bmp);
+           // i.setImageResource(R.drawable.albaraka);
+
+     //   } catch (IOException e) {
+          //  e.printStackTrace();
+       // }
+
+
+
+
 
         return view;
     }
-
 
 
 
