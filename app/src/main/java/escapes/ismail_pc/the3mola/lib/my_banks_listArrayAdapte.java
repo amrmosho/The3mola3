@@ -7,11 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -57,28 +60,31 @@ this.myparent=myparent;
 
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate( R.layout.home_mybanks_list, null);
+
+      final   View lauview = inflater.inflate( R.layout.home_mybanks_list, null);
 
 
-        TextView t = (TextView) view.findViewById(R.id.mybanks_txt_bank_title);
+
+
+        TextView t = (TextView) lauview.findViewById(R.id.mybanks_txt_bank_title);
       final   my_banks_list_item cat = objects.get(position);
 
 
 
-        TextView mybanks_txt_aed_buy = (TextView) view.findViewById(R.id.mybanks_txt_aed_buy);
-        TextView mybanks_txt_aed_sell = (TextView) view.findViewById(R.id.mybanks_txt_aed_sell);
+        TextView mybanks_txt_aed_buy = (TextView) lauview.findViewById(R.id.mybanks_txt_aed_buy);
+        TextView mybanks_txt_aed_sell = (TextView) lauview.findViewById(R.id.mybanks_txt_aed_sell);
 
-        TextView mybanks_txt_usd_buy = (TextView) view.findViewById(R.id.mybanks_txt_usd_buy);
-        TextView mybanks_txt_usd_sell = (TextView) view.findViewById(R.id.mybanks_txt_usd_sell);
+        TextView mybanks_txt_usd_buy = (TextView) lauview.findViewById(R.id.mybanks_txt_usd_buy);
+        TextView mybanks_txt_usd_sell = (TextView) lauview.findViewById(R.id.mybanks_txt_usd_sell);
 
-        TextView mybanks_txt_eur_buy = (TextView) view.findViewById(R.id.mybanks_txt_eur_buy);
-        TextView mybanks_txt_eur_sell = (TextView) view.findViewById(R.id.mybanks_txt_eur_sell);
+        TextView mybanks_txt_eur_buy = (TextView) lauview.findViewById(R.id.mybanks_txt_eur_buy);
+        TextView mybanks_txt_eur_sell = (TextView) lauview.findViewById(R.id.mybanks_txt_eur_sell);
 
-        TextView mybanks_txt_sar_buy = (TextView) view.findViewById(R.id.mybanks_txt_sar_buy);
-        TextView mybanks_txt_sar_sell = (TextView) view.findViewById(R.id.mybanks_txt_sar_sell);
+        TextView mybanks_txt_sar_buy = (TextView) lauview.findViewById(R.id.mybanks_txt_sar_buy);
+        TextView mybanks_txt_sar_sell = (TextView) lauview.findViewById(R.id.mybanks_txt_sar_sell);
 
-        TextView mybanks_txt_kwd_buy = (TextView) view.findViewById(R.id.mybanks_txt_kwd_buy);
-        TextView mybanks_txt_kwd_sell = (TextView) view.findViewById(R.id.mybanks_txt_kwd_sell);
+        TextView mybanks_txt_kwd_buy = (TextView) lauview.findViewById(R.id.mybanks_txt_kwd_buy);
+        TextView mybanks_txt_kwd_sell = (TextView) lauview.findViewById(R.id.mybanks_txt_kwd_sell);
 
 
         mybanks_txt_aed_buy.setText(cat.getAed_buy());
@@ -98,7 +104,7 @@ this.myparent=myparent;
         mybanks_txt_kwd_sell.setText(cat.getKwd_sell());
 
 
-        ImageView bimage = (ImageView) view.findViewById(R.id.mybanks_image_bank_);
+        ImageView bimage = (ImageView) lauview.findViewById(R.id.mybanks_image_bank_);
 
 
         t.setText(cat.getTitle());
@@ -106,36 +112,86 @@ this.myparent=myparent;
         int id = context.getApplicationContext().getResources().getIdentifier(name, "drawable", context.getPackageName());
         bimage.setImageResource(id);
 
+      final   Animation FabOpen,FabClose,FabRotate,FabRotateBack;
+
+        FabOpen= AnimationUtils.loadAnimation(lauview.getContext(),R.anim.fab_open);
+        FabClose= AnimationUtils.loadAnimation(lauview.getContext(),R.anim.fab_close);
 
 
 
 
 
-        FloatingActionButton FloatingActionButton_remove_pank = (FloatingActionButton) view.findViewById(R.id.FloatingActionButton_remove_pank);
+     final    FloatingActionButton FloatingActionButton_remove_pank = (FloatingActionButton) lauview.findViewById(R.id.FloatingActionButton_remove_pank);
 
+        FloatingActionButton_remove_pank.setVisibility(View.INVISIBLE);
 
-        FloatingActionButton_remove_pank.setOnClickListener(new View.OnClickListener() {
+        lauview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
 
 
-                db d=new db("banks");
-                d.thisContext=view.getContext();
-                d.sand_data.put("bank",cat.getID());
-                d.sand_data.put("pushbots_is", Pushbots.sharedInstance().getGCMRegistrationId());
-                d.sand_data.put("device_type","2");
-                d.sand_data.put("status","remove");
-                d.get_data();
+              if (FloatingActionButton_remove_pank.getVisibility() ==View.VISIBLE )  {
+
+                  FloatingActionButton_remove_pank.setAnimation(FabClose);
+
+                  FloatingActionButton_remove_pank.setVisibility(View.INVISIBLE);
+              }else{
+                  FloatingActionButton_remove_pank.setAnimation(FabOpen);
+                  FloatingActionButton_remove_pank.setVisibility(View.VISIBLE);
+
+
+              }
+
+
+            }
+        });
+
+
+        FloatingActionButton_remove_pank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick( final View view) {
+
+
+                lauview.setAnimation(FabClose);
+
+
                 myparent.update_mybanks();
+
+
+                FabClose.setAnimationListener(new Animation.AnimationListener(){
+                    @Override
+                    public void onAnimationStart(Animation arg0) {
+                    }
+                    @Override
+                    public void onAnimationRepeat(Animation arg0) {
+                    }
+                    @Override
+                    public void onAnimationEnd(Animation arg0) {
+
+
+                             db d=new db("banks");
+                        d.thisContext=view.getContext();
+                        d.sand_data.put("bank",cat.getID());
+                        d.sand_data.put("pushbots_is", Pushbots.sharedInstance().getGCMRegistrationId());
+                        d.sand_data.put("device_type","2");
+                        d.sand_data.put("status","remove");
+                        d.get_data();
+
+                    }
+                });
+            /*
+
+             */
+
 
             }
         });
 
 
 
-        return view;
+        return lauview;
     }
 
 

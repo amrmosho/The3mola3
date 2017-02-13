@@ -69,14 +69,18 @@
                     app:layout_constraintHorizontal_bias="0.37" />
 
                 <TextView
-                    android:text="TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:text="TextView TextView TextView TextView TextView"
+                    android:layout_width="129dp"
+                    android:layout_height="37dp"
                     android:id="@+id/max_min_txt_maxbank"
                     android:textSize="12sp"
                     app:layout_constraintTop_toBottomOf="@+id/max_min_txt_max"
                     app:layout_constraintLeft_toLeftOf="@+id/max_min_txt_max"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintRight_toLeftOf="@+id/mybanks_txt_eur_sell"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintHorizontal_bias="0.0" />
 
                 <TextView
                     android:text="TextView"
@@ -105,9 +109,9 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginRight="16dp"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="32dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginLeft="24dp"
+                android:layout_marginLeft="32dp"
                 app:layout_constraintHorizontal_bias="0.01" />
 
             <android.support.design.widget.FloatingActionButton

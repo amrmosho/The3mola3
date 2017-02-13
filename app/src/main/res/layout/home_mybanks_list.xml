@@ -92,7 +92,7 @@
                     android:layout_marginLeft="16dp" />
 
                 <TextView
-                    android:text="Sell"
+                    android:text="Buy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/max_min_txt_min"
@@ -110,7 +110,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:text="Buy"
+                    android:text="Sell"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/Buy"

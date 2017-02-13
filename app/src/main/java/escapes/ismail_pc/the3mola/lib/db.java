@@ -140,12 +140,27 @@ public class db  {
 
 
         }
+
+
+
+        List<String> addEd = new  ArrayList<>();
+
         void fill_bank_table(ArrayList<HashMap<String, String>> listdata) {
             final List<bank_table_list_item> mydata = new ArrayList<>();
             for (HashMap<String, String> h : listdata) {
+
+
+                if (!addEd.contains(h.get(idKey))) {
+                    addEd.add(h.get(idKey));
+
                 bank_table_list_item c = new bank_table_list_item();
+
+
+
                 c.setTitle(h.get(titleKey));
 
+
+                    c.setAllData(h);
                 if (desKey!=""){
                     c.setDes(h.get(desKey));
                 }
@@ -166,10 +181,15 @@ public class db  {
 
                 mydata.add(c);
             }
+            }
 
             bank_table_Adapte    adapter = new bank_table_Adapte(c, 0, mydata,myparent);
             v.setAdapter(adapter);
         }
+
+
+
+
 
 
         void fill_my_banks(ArrayList<HashMap<String, String>> listdata) {

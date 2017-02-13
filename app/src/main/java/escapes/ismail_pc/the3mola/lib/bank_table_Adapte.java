@@ -71,12 +71,20 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
         ImageButton addTofav = (ImageButton) view.findViewById(R.id.addTofav);
 
 
+      if ( cat.getAllData().get("fav").equalsIgnoreCase("1")){
+
+          addTofav.setImageResource(R.drawable.act_fav);
+      }
+
+
         addTofav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Log.d("bank_table_Adapte",context.getPackageName());
-                data_home_tabs a= (data_home_tabs)      context;
+
+
+
+
                 myparent.update_mybanks();
                 db d=new db("banks");
                 d.thisContext=view.getContext();
@@ -84,7 +92,26 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
                 d.sand_data.put("pushbots_is",Pushbots.sharedInstance().getGCMRegistrationId());
                 d.sand_data.put("device_type","2");
 
+
+                ImageButton v= (ImageButton)view;
+
+
+                if ( cat.getAllData().get("fav").equalsIgnoreCase("1")){
+                    d.sand_data.put("status","remove");
+                    cat.getAllData().put("fav" ,"0");
+                    v.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                }else{
+
+                    cat.getAllData().put("fav" ,"1");
+                    v.setImageResource(R.drawable.act_fav);
+
+                }
+
+
+
+
                 d.get_data();
+
 
             }
         });
@@ -96,7 +123,7 @@ class bank_table_Adapte extends ArrayAdapter<bank_table_list_item>  {
 
         String name = cat.getID();
 
-        Log.e("name" ,name);
+       // Log.e("name" ,name);
         int id = context.getApplicationContext().getResources().getIdentifier(name, "drawable", context.getPackageName());
        // Drawable drawable = context.getResources().getDrawable(id);
         i.setImageResource(id);

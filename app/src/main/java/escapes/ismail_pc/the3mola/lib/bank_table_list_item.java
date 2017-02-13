@@ -1,5 +1,7 @@
 package escapes.ismail_pc.the3mola.lib;
 
+import java.util.HashMap;
+
 /**
  * Created by ismail on 10/22/2015.
  */
@@ -11,6 +13,7 @@ public class bank_table_list_item {
     private String id="";
     private  String sell="";
     private  String buy="";
+    private HashMap<String, String> allData=new HashMap<> ();
 
     public String getTitle() {
         return title;
@@ -64,5 +67,13 @@ public class bank_table_list_item {
 
     public void setBuy(String buy) {
         this.buy = buy;
+    }
+
+    public HashMap<String, String> getAllData() {
+        return allData;
+    }
+
+    public void setAllData(HashMap<String, String> allData) {
+        this.allData = allData;
     }
 }
